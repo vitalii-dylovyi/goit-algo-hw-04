@@ -1,6 +1,7 @@
 import random
 import timeit
 
+
 # Merge Sort Implementation
 def merge_sort(arr):
     if len(arr) <= 1:
@@ -11,6 +12,7 @@ def merge_sort(arr):
     right = merge_sort(arr[mid:])
 
     return merge(left, right)
+
 
 def merge(left, right):
     result = []
@@ -28,6 +30,7 @@ def merge(left, right):
     result.extend(right[j:])
     return result
 
+
 # Insertion Sort Implementation
 def insertion_sort(arr):
     for i in range(1, len(arr)):
@@ -39,19 +42,21 @@ def insertion_sort(arr):
         arr[j + 1] = key
     return arr
 
+
 # Generate datasets
-def generate_data(size, data_type='random'):
-    if data_type == 'random':
+def generate_data(size, data_type="random"):
+    if data_type == "random":
         return [random.randint(0, size) for _ in range(size)]
-    elif data_type == 'sorted':
+    elif data_type == "sorted":
         return list(range(size))
-    elif data_type == 'reversed':
+    elif data_type == "reversed":
         return list(range(size, 0, -1))
+
 
 # Test sorting algorithms
 def test_sorting_algorithms():
     sizes = [100, 1000, 10000]
-    data_types = ['random', 'sorted', 'reversed']
+    data_types = ["random", "sorted", "reversed"]
 
     print(f"{'Size':<10}{'Type':<10}{'Algorithm':<15}{'Time (s)':<10}")
     print("-" * 45)
@@ -66,12 +71,17 @@ def test_sorting_algorithms():
 
             # Measure Insertion Sort (only for small sizes, as it is slow)
             if size <= 1000:
-                insertion_time = timeit.timeit(lambda: insertion_sort(data.copy()), number=1)
-                print(f"{size:<10}{data_type:<10}{'Insertion Sort':<15}{insertion_time:<10.6f}")
+                insertion_time = timeit.timeit(
+                    lambda: insertion_sort(data.copy()), number=1
+                )
+                print(
+                    f"{size:<10}{data_type:<10}{'Insertion Sort':<15}{insertion_time:<10.6f}"
+                )
 
             # Measure Timsort (Python's built-in sorted)
             timsort_time = timeit.timeit(lambda: sorted(data), number=1)
             print(f"{size:<10}{data_type:<10}{'Timsort':<15}{timsort_time:<10.6f}")
+
 
 # Run the tests
 if __name__ == "__main__":
